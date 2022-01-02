@@ -1,5 +1,6 @@
 package com.flyAway.actions;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,22 +8,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.flyAway.DBConnection;
+import com.flyAway.domain.User;
 
-public class LoginAction implements Action {
-	private HttpServletRequest request;
+public class LoginAction extends AbstractAction implements Action {
 
-	public LoginAction(HttpServletRequest request) {
-		this.request = request;
+	public LoginAction(HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
 	}
 
 	@Override
 	public void execute() {
-		DBConnection db = null;
-		Connection conn;
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
 
 		try {
 			db = new DBConnection();
@@ -31,12 +33,23 @@ public class LoginAction implements Action {
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
-			System.out.println("db row = " + rs.toString());
+
+			if (!rs.next()) {
+				session.setAttribute("result", "error");
+			} else {
+				User user = new User(username, password);
+				session.setAttribute("auth", user);
+				session.removeAttribute("result");
+			}
+			response.sendRedirect("/FlyAway/");
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
