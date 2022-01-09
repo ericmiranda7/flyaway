@@ -36,7 +36,7 @@ public class LoginAction extends AbstractAction implements Action {
 			ResultSet rs = ps.executeQuery();
 
 			if (!rs.next()) {
-				session.setAttribute("result", "error");
+				session.setAttribute("result", "Warning: Username or password incorrect!");
 			} else {
 				User user = new User(username, password, "1".equals(rs.getString(3)));
 				session.setAttribute("auth", user);

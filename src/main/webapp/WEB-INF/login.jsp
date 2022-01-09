@@ -8,7 +8,7 @@
 <title>Login to your account</title>
 </head>
 <body>
-	<c:out value="${result}"></c:out>
+	<p style="border: 1px solid red">${result}</p>
 	<c:remove var="result" scope="session"/>
 	<p>Please login:</p>
 	<form action="action/login" method="POST">
