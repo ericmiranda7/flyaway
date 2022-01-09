@@ -3,12 +3,15 @@ package com.flyAway.domain;
 import java.io.Serializable;
 
 public class User implements Serializable {
+
 	private String username;
 	private String password;
-	
-	public User(String username, String password) {
+	private boolean isAdmin;
+
+	public User(String username, String password, boolean isAdmin) {
 		this.username = username;
 		this.password = password;
+		this.isAdmin = isAdmin;
 	}
 
 	public String getUsername() {
@@ -25,5 +28,13 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

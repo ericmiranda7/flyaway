@@ -9,7 +9,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @WebFilter("/*")
 public class FrontControllerFilter implements Filter {
@@ -24,6 +23,7 @@ public class FrontControllerFilter implements Filter {
 		String path = req.getRequestURI().substring(req.getContextPath().length());
 		req.getSession(true);
 
+		//TODO(): redirect to login if any page hit without login
 		if (path.equals("/")) {
 			request.getRequestDispatcher("/pages/").forward(request, response);
 		} else {

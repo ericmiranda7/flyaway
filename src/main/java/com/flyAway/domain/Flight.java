@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Flight implements Serializable {
-	private static final long serialVersionUID = -6422826972747536884L;
 	private String name;
 	private double price;
 	private int number;
@@ -18,10 +17,6 @@ public class Flight implements Serializable {
 	private int seatAvailability;
 	private LocalDate travelDate;
 	private String flightClass;
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	public String getName() {
 		return name;

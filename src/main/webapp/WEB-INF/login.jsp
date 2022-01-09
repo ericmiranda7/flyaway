@@ -8,10 +8,8 @@
 <title>Login to your account</title>
 </head>
 <body>
-	<c:if test="${sessionScope.result}">
-		<p>Error</p>
-	</c:if>
-	<c:out value="${sessionScope.result}"></c:out>
+	<c:out value="${result}"></c:out>
+	<c:remove var="result" scope="session"/>
 	<p>Please login:</p>
 	<form action="action/login" method="POST">
 		<label for="username">Username: </label>

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,7 +38,7 @@ public class LoginAction extends AbstractAction implements Action {
 			if (!rs.next()) {
 				session.setAttribute("result", "error");
 			} else {
-				User user = new User(username, password);
+				User user = new User(username, password, "1".equals(rs.getString(3)));
 				session.setAttribute("auth", user);
 				session.removeAttribute("result");
 			}
