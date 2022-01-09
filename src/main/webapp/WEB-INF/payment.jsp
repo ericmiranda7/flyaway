@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Image here... </br>
+	<img src="../img/qrcode.png" height="250px" width="250px"/><br/>
+	Please scan and pay!
 	<form action="/FlyAway/action/confirm">
 		<input type="submit" value="Done"/>
 	</form>
